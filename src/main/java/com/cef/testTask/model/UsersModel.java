@@ -68,11 +68,12 @@ public class UsersModel {
 
     public UsersModel(){}
 
-    public UsersModel(Integer id, String login, String password, String name, String email) {
+    public UsersModel(Integer id, String login, String password, String name, String email, String image) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;
         this.email = email;
+        this.image = image;
     }
 }

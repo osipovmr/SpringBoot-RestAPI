@@ -15,7 +15,7 @@ public class UsersService {
         this.usersRepository = usersRepository;
     }
 
-    public UsersModel registerUser(String login, String password, String name, String email){
+    public UsersModel registerUser(String login, String password, String name, String email, String image){
         if (login == null || password == null)
             return null;
         else {
@@ -28,6 +28,7 @@ public class UsersService {
             usersModel.setPassword(password);
             usersModel.setName(name);
             usersModel.setEmail(email);
+            usersModel.setImage(image);
             return usersRepository.save(usersModel);}
         }
 
