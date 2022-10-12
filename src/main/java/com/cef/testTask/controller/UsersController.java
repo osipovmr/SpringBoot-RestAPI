@@ -25,6 +25,7 @@ public class UsersController {
         return "register_page";
     }
 
+
     @GetMapping("/login")
     public String getLoginPage(Model model){
         model.addAttribute("loginRequest", new UsersModel());

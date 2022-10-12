@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register page</title>
+</head>
+<body>
+    <form method="post" action="/addOrder" th:object="${addOrderRequest}">
+
+    <label for="Product">Enter product:</label>
+    <input type="text" th:field="*{product}"
+    pattern="(?=.*[A-z]).{5,}"
+    title="Must contain at least 5 or more characters"
+    required id = "product"/>
+    <br/>
+
+    <label for="Value">Enter value:</label>
+    <input type="number" th:field="*{value}" required id = "value"/>
+    <br/>
+
+    <label for="City">Enter city:</label>
+    <input type="text" th:field="*{city}" required id = "city"/>
+    <br/>
+
+    <input type = "submit" value="Add order!"/>
+    <br/>
+    <a href="/orders">Show all orders</a>
+    <a href="/">Navigate to main</a>
+</form>
+</body>
+</html>

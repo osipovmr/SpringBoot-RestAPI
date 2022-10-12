@@ -15,6 +15,7 @@ public class UsersModel {
     String password;
     String name;
     String email;
+    String image;
 
 
     public Integer getId() {
@@ -56,6 +57,15 @@ public class UsersModel {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public UsersModel(){}
 
     public UsersModel(Integer id, String login, String password, String name, String email) {
