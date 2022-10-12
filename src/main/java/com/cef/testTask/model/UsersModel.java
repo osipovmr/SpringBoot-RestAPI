@@ -9,11 +9,11 @@ import java.util.Objects;
 @Table(name = "users_table")
 public class UsersModel extends Model {
 
-    String login;
-    String password;
-    String name;
-    String email;
-    String image;
+    private String login;
+    private String password;
+    private String name;
+    private String email;
+    private String image;
 
 
     public String getLogin() {
