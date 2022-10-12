@@ -35,7 +35,7 @@ public class UsersController {
     public String register(@ModelAttribute UsersModel usersModel){
         System.out.println("register request " + usersModel);
         UsersModel registeredUser = usersService.registerUser(usersModel.getLogin(), usersModel.getPassword(),
-                usersModel.getEmail());
+                usersModel.getName(), usersModel.getEmail());
         return registeredUser == null ? "error_page" : "redirect:/login";
     }
 
