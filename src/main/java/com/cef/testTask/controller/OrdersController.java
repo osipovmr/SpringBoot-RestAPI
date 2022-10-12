@@ -32,8 +32,8 @@ public class OrdersController {
 
     @PostMapping("/addOrder")
     public String addOrder(@ModelAttribute OrdersModel ordersModel){
-        OrdersModel addedOrder = ordersService.createOrder(ordersModel.getProduct(),
-                ordersModel.getValue(), ordersModel.getCity());
+        OrdersModel addedOrder = ordersService.createOrder(ordersModel.getProduct().toLowerCase(),
+                ordersModel.getValue(), ordersModel.getCity().trim());
         return addedOrder == null ? "error_page" : "redirect:/addOrder";
     }
 
