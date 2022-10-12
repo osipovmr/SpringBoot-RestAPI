@@ -7,24 +7,14 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users_table")
-public class UsersModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+public class UsersModel extends Model {
+
     String login;
     String password;
     String name;
     String email;
     String image;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getLogin() {
         return login;
@@ -68,8 +58,7 @@ public class UsersModel {
 
     public UsersModel(){}
 
-    public UsersModel(Integer id, String login, String password, String name, String email, String image) {
-        this.id = id;
+    public UsersModel(String login, String password, String name, String email, String image) {
         this.login = login;
         this.password = password;
         this.name = name;

@@ -4,30 +4,21 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "orders_table")
-public class OrdersModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+public class OrdersModel extends Model{
+
     String product;
     Integer value;
     String city;
 
     public OrdersModel(){}
 
-    public OrdersModel(Integer id, String product, Integer value, String city) {
-        this.id = id;
+    public OrdersModel(String product, Integer value, String city) {
         this.product = product;
         this.value = value;
         this.city = city;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getProduct() {
         return product;
