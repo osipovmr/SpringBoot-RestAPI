@@ -11,4 +11,5 @@ public class OrdersModel extends Model{
     String product;
     Integer value;
     String city;
+
 }

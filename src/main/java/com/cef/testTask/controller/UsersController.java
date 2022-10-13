@@ -1,5 +1,7 @@
 package com.cef.testTask.controller;
 
+import com.cef.testTask.dto.OrdersDto;
+import com.cef.testTask.dto.UsersDto;
 import com.cef.testTask.model.UsersModel;
 import com.cef.testTask.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class UsersController {
@@ -17,6 +22,12 @@ public class UsersController {
 
     public UsersController(UsersService usersService) {
         this.usersService = usersService;
+    }
+
+    @GetMapping("/usersLocation")
+    public @ResponseBody List<UsersDto> getUsersLocal () {
+        System.out.println(usersService.getAllUsersLocal());
+        return usersService.getAllUsersLocal();
     }
 
     @GetMapping("/register")

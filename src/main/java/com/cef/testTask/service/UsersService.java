@@ -1,9 +1,15 @@
 package com.cef.testTask.service;
 
+import com.cef.testTask.dto.OrdersDto;
+import com.cef.testTask.dto.UsersDto;
+import com.cef.testTask.model.OrdersModel;
 import com.cef.testTask.model.UsersModel;
 import com.cef.testTask.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UsersService {
@@ -13,6 +19,22 @@ public class UsersService {
 
     public UsersService(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
+    }
+
+
+    public List<UsersDto> getAllUsersLocal () {
+        return usersRepository.findAll()
+                .stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    private UsersDto convertEntityToDto (UsersModel usersModel) {
+        UsersDto usersDto = new UsersDto();
+        usersDto.setLogin(usersModel.getLogin());
+        usersDto.setName(usersModel.getName());
+        usersDto.setEmail(usersModel.getEmail());
+        return usersDto;
     }
 
     public UsersModel registerUser(String login, String password, String name, String email, String image){

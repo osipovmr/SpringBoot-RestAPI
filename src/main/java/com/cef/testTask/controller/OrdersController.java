@@ -38,7 +38,6 @@ public class OrdersController {
     public @ResponseBody List<OrdersDto> getOrdersLocal () {
         System.out.println(ordersService.getAllOrdersLocal());
         return ordersService.getAllOrdersLocal();
-
     }
 
     @PostMapping("/addOrder")
