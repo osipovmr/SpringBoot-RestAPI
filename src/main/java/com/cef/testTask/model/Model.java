@@ -1,16 +1,14 @@
 package com.cef.testTask.model;
 
-import org.hibernate.PersistentObjectException;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Persistent;
-
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
 @EntityListeners({OrdersModel.class, UsersModel.class})
+@Data
 public abstract class Model implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,20 +16,4 @@ public abstract class Model implements Serializable {
 
     @CreatedDate
     private Date createdDate = new Date();
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
 }
