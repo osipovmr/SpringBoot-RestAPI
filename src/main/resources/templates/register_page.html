@@ -5,7 +5,7 @@
     <title>Register page</title>
 </head>
 <body>
-    <form method="post" action="/register" th:object="${registerRequest}">
+    <form method="post" action="/register" th:object="${registerRequest}" enctype="multipart/form-data">
 
     <label for="Login">Enter login:</label>
     <input type="text" th:field="*{login}"
@@ -49,8 +49,8 @@
     <input type="email" th:field="*{email}" id = "email"/>
     <br/>
 
-    <label for="Image">Enter image:</label>
-    <input type="file" th:field="*{image}" id = "image"/>
+    <label for="File">Enter image:</label>
+    <input type="file" accept=".png, .jpg, .jpeg" name = "file" id = "file"/>
     <br/>
 
     <input type = "submit" value="Register!"/>

@@ -6,6 +6,19 @@
 </head>
 <body>
 <h1>Welcome to the personal page! <span th:text="${userLogin}"></span></h1>
+<br>
+<p>
+   Вы являетесь зарегистрированным пользователем
+</p>
+<ol>
+    <li> Ваш логин: <span th:text="${userLogin}" ></span></li>
+    <li> Ваше имя: <span th:text="${userName}" ></span></li>
+    <li> Ваш e-mail: <span th:text="${userEmail}" ></span></li>
+    <li> Имя картинки: <span th:text="${userFileName}" ></span></li>
+    <li> Путь до картинки: <span th:text="${userFilePath}" ></span></li>
+</ol>
+
+<img th:src="${userFileName}" width="250" height="auto" alt=""/>
 <hr/>
 <a href="/addOrder">Add new order</a>
 <a href="/orders">Show all orders</a>

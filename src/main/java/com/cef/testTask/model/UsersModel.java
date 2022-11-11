@@ -1,6 +1,7 @@
 package com.cef.testTask.model;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -13,5 +14,7 @@ public class UsersModel extends Model {
     private String password;
     private String name;
     private String email;
-    private String image;
+    private String fileName;
+    private String filePath;
+
 }
