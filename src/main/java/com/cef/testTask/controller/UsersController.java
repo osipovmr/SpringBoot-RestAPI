@@ -41,7 +41,7 @@ public class UsersController {
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
         model.addAttribute("registerRequest", new UsersModel());
-        return "register_page";
+        return "register_form";
     }
 
 
@@ -55,7 +55,7 @@ public class UsersController {
     public String register(@ModelAttribute("registerRequest") @Valid UsersModel usersModel, BindingResult bindingResult,
                            @RequestParam("file") MultipartFile file) throws IOException {
         if (bindingResult.hasErrors())
-            return "register_page";
+            return "register_form";
         String fileName = file.getOriginalFilename();
         String filePath = Paths.get(uploadDirectory, fileName).toString();
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
