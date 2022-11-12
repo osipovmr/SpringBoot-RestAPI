@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>New order form</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<h1>New order form</h1>
+<p>Please fill out this form with the required information</p>
+
+<form action="/addOrder" method="POST" th:object="${addOrderRequest}" >
+
+  <fieldset>
+
+    <label for="Product">Enter product:
+    <input type="text" th:field="*{product}" id = "product"/></label>
+    <div style="color:red" th:if="${#fields.hasErrors('product')}" th:errors="*{product}">Product error</div>
+
+    <label for="Value">Enter value:
+    <input type="number" th:field="*{value}" id = "value"/></label>
+    <div style="color:red" th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Value error</div>
+
+
+    <label for="City">Enter city:
+    <input type="text" th:field="*{city}" id = "city"/></label>
+    <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City error</div>
+
+  </fieldset>
+
+
+
+  <input type="submit" value="Add order!" name="submit">
+  <br/>
+  <a href="/orders">Show all orders</a>
+  <a href="/">Navigate to main</a>
+
+</form>
+
+</body>
+</html>

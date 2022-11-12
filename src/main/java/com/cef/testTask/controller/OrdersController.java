@@ -33,7 +33,7 @@ public class OrdersController {
     @GetMapping("/addOrder")
     public String addOrderPage(Model model){
         model.addAttribute("addOrderRequest", new OrdersModel());
-        return "add_order";
+        return "order_form";
     }
 
     @GetMapping("/ordersLocation")
@@ -45,7 +45,7 @@ public class OrdersController {
     @PostMapping("/addOrder")
     public String addOrder(@ModelAttribute ("addOrderRequest") @Valid OrdersModel ordersModel, BindingResult bindingResult){
         if (bindingResult.hasErrors())
-            return "add_Order";
+            return "order_form";
         OrdersModel addedOrder = ordersService.createOrder(ordersModel.getProduct().toLowerCase(),
                 ordersModel.getValue(), ordersModel.getCity().trim());
         return addedOrder == null ? "error_page" : "redirect:/addOrder";
