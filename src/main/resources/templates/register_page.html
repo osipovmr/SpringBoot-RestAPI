@@ -8,10 +8,8 @@
     <form method="post" action="/register" th:object="${registerRequest}" enctype="multipart/form-data">
 
     <label for="Login">Enter login:</label>
-    <input type="text" th:field="*{login}"
-    pattern="(?=.*[A-z]).{3,}"
-    title="Must contain at least 3 or more characters"
-    required id = "login"/>
+    <input type="text" th:field="*{login}"  id = "login"/>
+    <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login error</div>
 
     <br/>
     <label for="Password">Enter password:</label>
@@ -47,6 +45,7 @@
 
     <label for="Email">Enter email:</label>
     <input type="email" th:field="*{email}" id = "email"/>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
     <br/>
 
     <label for="File">Enter image:</label>

@@ -6,10 +6,13 @@ import com.cef.testTask.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
+
+import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
+@Validated
 public class UsersController {
 
     public static String uploadDirectory = "/Users/vulpix_li/Downloads/SpringBoot-RestAPI/src/main/resources/static";
@@ -49,8 +53,10 @@ public class UsersController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute UsersModel usersModel,
+    public String register(@Valid UsersModel usersModel, BindingResult bindingResult,
                            @RequestParam("file") MultipartFile file) throws IOException {
+        if (bindingResult.hasErrors())
+            return "error_page";
         String fileName = file.getOriginalFilename();
         String filePath = Paths.get(uploadDirectory, fileName).toString();
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
