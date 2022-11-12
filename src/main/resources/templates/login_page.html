@@ -17,9 +17,9 @@
     <br/>
     <label for="Password">Enter password:</label>
     <input type="password" th:field="*{password}"
-           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
            title="Must contain at least one number and one uppercase and lowercase letter,
-       and at least 8 or more characters"
+       and at least 6 or more characters"
            required id = "password"/>
     <br/>
 

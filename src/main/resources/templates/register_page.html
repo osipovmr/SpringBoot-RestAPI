@@ -9,43 +9,39 @@
 
     <label for="Login">Enter login:</label>
     <input type="text" th:field="*{login}"  id = "login"/>
-    <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login error</div>
+    <div style="color:red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login error</div>
 
-    <br/>
-    <label for="Password">Enter password:</label>
-    <input type="password" th:field="*{password}"
-    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-    title="Must contain at least one number and one uppercase and lowercase letter,
+        <br/>
+        <label for="Password">Enter password:</label>
+        <input type="password" th:field="*{password}"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+            title="Must contain at least one number and one uppercase and lowercase letter,
             and at least 6 or more characters"
+            onchange="this.setCustomValidity(this.validity.patternMismatch ?
+            'Must have at least 6 characters' : '');
+            if(this.checkValidity()) form.password_two.pattern = this.value;"
+            required id = "password"/>
+        <br/>
 
-       onchange="this.setCustomValidity(this.validity.patternMismatch ?
-       'Must have at least 6 characters' : '');
-       if(this.checkValidity()) form.password_two.pattern = this.value;"
-    required id = "password"/>
-    <br/>
-
-    <label for="Password_two">Confirm password:</label>
-    <input type="password"
-    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-    title="Must contain at least one number and one uppercase and lowercase letter,
-       and at least 6 or more characters"
-
-      onchange="this.setCustomValidity(this.validity.patternMismatch ?
-     'Please enter the same Password as above' : '');"
-    required id = "password_two"/>
+        <label for="Password_two">Confirm password:</label>
+        <input type="password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+            title="Must contain at least one number and one uppercase and lowercase letter,
+            and at least 6 or more characters"
+            onchange="this.setCustomValidity(this.validity.patternMismatch ?
+            'Please enter the same Password as above' : '');"
+            required id = "password_two"/>
         <br/>
 
     <hr/>
     <label for="Name">Enter your name:</label>
-    <input type="text" th:field="*{name}"
-    pattern="(?=.*[A-z]).{3,}"
-    title="Must contain at least 3 or more characters"
-    required id = "name"/>
+    <input type="text" th:field="*{name}"  id = "name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
     <br/>
 
     <label for="Email">Enter email:</label>
-    <input type="email" th:field="*{email}" id = "email"/>
-    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    <input type="text" th:field="*{email}" id = "email"/>
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
     <br/>
 
     <label for="File">Enter image:</label>

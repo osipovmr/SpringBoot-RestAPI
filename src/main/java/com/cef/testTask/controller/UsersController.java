@@ -21,7 +21,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
-@Validated
 public class UsersController {
 
     public static String uploadDirectory = "/Users/vulpix_li/Downloads/SpringBoot-RestAPI/src/main/resources/static";
@@ -53,10 +52,10 @@ public class UsersController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid UsersModel usersModel, BindingResult bindingResult,
+    public String register(@ModelAttribute("registerRequest") @Valid UsersModel usersModel, BindingResult bindingResult,
                            @RequestParam("file") MultipartFile file) throws IOException {
         if (bindingResult.hasErrors())
-            return "error_page";
+            return "register_page";
         String fileName = file.getOriginalFilename();
         String filePath = Paths.get(uploadDirectory, fileName).toString();
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
