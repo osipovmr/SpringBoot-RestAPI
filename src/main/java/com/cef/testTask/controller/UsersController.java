@@ -48,7 +48,7 @@ public class UsersController {
     @GetMapping("/login")
     public String getLoginPage(Model model){
         model.addAttribute("loginRequest", new UsersModel());
-        return "login_page";
+        return "login_form";
     }
 
     @PostMapping("/register")
