@@ -2,6 +2,7 @@ package com.cef.testTask.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;

@@ -4,6 +4,7 @@ import com.cef.testTask.dto.UsersDto;
 import com.cef.testTask.model.UsersModel;
 import com.cef.testTask.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,22 @@ public class UsersController {
 
     public UsersController(UsersService usersService) {
         this.usersService = usersService;
+    }
+
+    private final AuthService authService;
+
+    @PreAuthorize("hasAuthority('USER')")
+    @GetMapping("hello/user")
+    public ResponseEntity<String> helloUser() {
+        final JwtAuthentication authInfo = authService.getAuthInfo();
+        return ResponseEntity.ok("Hello user " + authInfo.getPrincipal() + "!");
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("hello/admin")
+    public ResponseEntity<String> helloAdmin() {
+        final JwtAuthentication authInfo = authService.getAuthInfo();
+        return ResponseEntity.ok("Hello admin " + authInfo.getPrincipal() + "!");
     }
 
     @GetMapping("/usersLocation")

@@ -69,6 +69,8 @@ input[type="submit"] {
   background-color: #3b3b4f;
   border-color: white;
   min-width: 250px;
+
+
 }
 input[type="button"] {
   display: inline-block;

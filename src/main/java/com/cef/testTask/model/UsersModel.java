@@ -2,8 +2,10 @@ package com.cef.testTask.model;
 
 import lombok.Data;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
 
 @Data
 @Entity
