@@ -1,17 +1,10 @@
 package com.cef.testTask.service;
 
-import com.cef.testTask.dto.OrdersDto;
 import com.cef.testTask.dto.UsersDto;
-import com.cef.testTask.model.OrdersModel;
 import com.cef.testTask.model.UsersModel;
 import com.cef.testTask.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
