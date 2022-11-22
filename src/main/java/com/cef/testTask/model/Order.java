@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 @Data
 @Entity
 @Table(name = "orders_table")
-public class OrdersModel extends Model{
+public class Order extends Model{
 
     @NotEmpty(message = "Product name should not be empty.")
     @Size(min = 3, max = 32, message = "Set product name from 3 to 32 letters.")

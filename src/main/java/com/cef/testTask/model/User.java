@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 @Data
 @Entity
 @Table(name = "users_table")
-public class UsersModel extends Model {
+public class User extends Model {
 
     @Size(min = 3, max = 32, message = "Set login from 3 to 32 letters.")
     private String login;

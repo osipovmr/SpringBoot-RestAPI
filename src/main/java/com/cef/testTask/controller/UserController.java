@@ -1,13 +1,12 @@
 package com.cef.testTask.controller;
 
-import com.cef.testTask.dto.UsersDto;
-import com.cef.testTask.model.UsersModel;
-import com.cef.testTask.service.UsersService;
+import com.cef.testTask.dto.UserDto;
+import com.cef.testTask.model.User;
+import com.cef.testTask.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,38 +20,38 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
-public class UsersController {
+public class UserController {
 
     public static String uploadDirectory = "/Users/vulpix_li/Downloads/SpringBoot-RestAPI/src/main/resources/static";
 
     @Autowired
-    private UsersService usersService;
+    private UserService userService;
 
-    public UsersController(UsersService usersService) {
-        this.usersService = usersService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/usersLocation")
-    public @ResponseBody List<UsersDto> getUsersLocal () {
-        System.out.println(usersService.getAllUsersLocal());
-        return usersService.getAllUsersLocal();
+    public @ResponseBody List<UserDto> getUsersLocal () {
+        System.out.println(userService.getAllUsersLocal());
+        return userService.getAllUsersLocal();
     }
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
-        model.addAttribute("registerRequest", new UsersModel());
+        model.addAttribute("registerRequest", new User());
         return "register_form";
     }
 
 
     @GetMapping("/login")
     public String getLoginPage(Model model){
-        model.addAttribute("loginRequest", new UsersModel());
+        model.addAttribute("loginRequest", new User());
         return "login_form";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("registerRequest") @Valid UsersModel usersModel, BindingResult bindingResult,
+    public String register(@ModelAttribute("registerRequest") @Valid User user, BindingResult bindingResult,
                            @RequestParam("file") MultipartFile file) throws IOException {
         if (bindingResult.hasErrors())
             return "register_form";
@@ -61,14 +60,14 @@ public class UsersController {
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
         stream.write(file.getBytes());
         stream.close();
-        UsersModel registeredUser = usersService.registerUser(usersModel.getLogin(), usersModel.getPassword(),
-                usersModel.getName(), usersModel.getEmail(), fileName, filePath);
+        User registeredUser = userService.registerUser(user.getLogin(), user.getPassword(),
+                user.getName(), user.getEmail(), fileName, filePath);
         return registeredUser == null ? "error_page" : "redirect:/login";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute UsersModel usersModel, Model model){
-        UsersModel authenticated = usersService.authenticate(usersModel.getLogin(), usersModel.getPassword());
+    public String login(@ModelAttribute User user, Model model){
+        User authenticated = userService.authenticate(user.getLogin(), user.getPassword());
         if (authenticated != null) {
             model.addAttribute("userLogin", authenticated.getLogin());
             model.addAttribute("userName", authenticated.getName());
