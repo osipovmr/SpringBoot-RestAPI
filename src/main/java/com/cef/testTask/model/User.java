@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -20,6 +22,14 @@ public class User extends Model {
 
     @Email(message = "Email should be valid.")
     private String email;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     private String fileName;
 

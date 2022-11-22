@@ -11,6 +11,7 @@ import java.util.Date;
 @Data
 public abstract class Model implements Serializable {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
