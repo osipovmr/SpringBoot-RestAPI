@@ -1,5 +1,6 @@
 package com.cef.testTask.model;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
