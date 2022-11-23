@@ -83,9 +83,15 @@ public class UserController {
             jwtResponse.setRefreshToken(jwtCreate.refreshToken(authenticated));
             jwtResponse.setLogin(authenticated.getLogin());
             System.out.println(authenticated.toString());
+            String response = "Произошла авторизация пользователя " + authenticated.getLogin()
+                    +"<br>"+
+                    "Назначенная роль : " + authenticated.getRoles()
+                    +"<br>"+
+                    jwtResponse.toString();
 
             //return "personal_page";} убрать респонсбади
-            return "Здесь должны быть токены пользователя: "+ authenticated.getLogin() + " роль: " + authenticated.getRoles() + jwtResponse.toString();}
+            return response;
+        }
         else {
             return "error_page";
         }

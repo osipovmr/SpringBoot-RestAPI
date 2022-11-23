@@ -14,10 +14,10 @@ public class JwtResponse {
 
     @Override
     public String toString() {
-        return "JwtResponse{" +
-                "accessToken='" + accessToken + '\'' +
-                ", refreshToken='" + refreshToken + '\'' +
-                ", login='" + login + '\'' +
-                '}';
+        return "Сгенерированные токены: "
+                +"<br>"+
+                "accessToken = " + accessToken
+                +"<br>"+
+                "refreshToken = " + refreshToken;
     }
 }
