@@ -22,7 +22,7 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    public static String uploadDirectory = "/Users/vulpix_li/Downloads/SpringBoot-RestAPI/src/main/resources/static";
+    public static String uploadDirectory = "src/main/resources/static";
 
     @Autowired
     private UserService userService;
@@ -63,10 +63,11 @@ public class UserController {
         User registeredUser = userService.registerUser(user.getLogin(), user.getPassword(),
                 user.getName(), user.getEmail(), fileName, filePath);
         return registeredUser == null ? "error_page" : "redirect:/login";
+
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute User user, Model model){
+    public @ResponseBody String login(@ModelAttribute User user, Model model){
         User authenticated = userService.authenticate(user.getLogin(), user.getPassword());
         if (authenticated != null) {
             model.addAttribute("userLogin", authenticated.getLogin());
@@ -75,7 +76,8 @@ public class UserController {
             model.addAttribute("userFileName", authenticated.getFileName());
             model.addAttribute("userFilePath", authenticated.getFilePath());
 
-            return "personal_page";}
+            //return "personal_page";} убрать респонсбади
+            return "Здесь должны быть токены";}
         else {
             return "error_page";
         }
