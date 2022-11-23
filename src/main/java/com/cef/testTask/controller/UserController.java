@@ -79,9 +79,9 @@ public class UserController {
             model.addAttribute("userEmail", authenticated.getEmail());
             model.addAttribute("userFileName", authenticated.getFileName());
             model.addAttribute("userFilePath", authenticated.getFilePath());
-            jwtResponse.setAccessToken(jwtCreate.accessToken(user));
-            jwtResponse.setRefreshToken(jwtCreate.refreshToken(user));
-            jwtResponse.setLogin(user.getLogin());
+            jwtResponse.setAccessToken(jwtCreate.accessToken(authenticated));
+            jwtResponse.setRefreshToken(jwtCreate.refreshToken(authenticated));
+            jwtResponse.setLogin(authenticated.getLogin());
             System.out.println(authenticated.toString());
 
             //return "personal_page";} убрать респонсбади
