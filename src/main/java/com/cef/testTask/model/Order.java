@@ -7,7 +7,7 @@ import javax.validation.constraints.*;
 
 @Data
 @Entity
-@Table(name = "Order_table")
+@Table(name = "order_table")
 public class Order extends Model{
 
     @Id

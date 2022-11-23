@@ -2,6 +2,8 @@ package com.cef.testTask.controller;
 
 import com.cef.testTask.dto.UserDto;
 import com.cef.testTask.model.User;
+import com.cef.testTask.security.JwtCreate;
+import com.cef.testTask.security.JwtResponse;
 import com.cef.testTask.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ import java.util.List;
 
 @Controller
 public class UserController {
+    public JwtCreate jwtCreate = new JwtCreate();
+    public JwtResponse jwtResponse = new JwtResponse();
 
     public static String uploadDirectory = "src/main/resources/static";
 
@@ -75,9 +79,13 @@ public class UserController {
             model.addAttribute("userEmail", authenticated.getEmail());
             model.addAttribute("userFileName", authenticated.getFileName());
             model.addAttribute("userFilePath", authenticated.getFilePath());
+            jwtResponse.setAccessToken(jwtCreate.accessToken(user));
+            jwtResponse.setRefreshToken(jwtCreate.refreshToken(user));
+            jwtResponse.setLogin(user.getLogin());
+            System.out.println(authenticated.toString());
 
             //return "personal_page";} убрать респонсбади
-            return "Здесь должны быть токены";}
+            return "Здесь должны быть токены пользователя: "+ authenticated.getLogin() + " роль: " + authenticated.getRoles() + jwtResponse.toString();}
         else {
             return "error_page";
         }

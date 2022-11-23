@@ -1,12 +1,14 @@
 package com.cef.testTask.service;
 
 import com.cef.testTask.dto.UserDto;
+import com.cef.testTask.model.Role;
 import com.cef.testTask.model.User;
 import com.cef.testTask.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +55,7 @@ public class UserService {
             user.setEmail(email);
             user.setFileName(fileName);
             user.setFilePath(filePath);
+            //user.setRoles(Collections.singleton(new Role("USER")));
             return userRepository.save(user);
         }
     }

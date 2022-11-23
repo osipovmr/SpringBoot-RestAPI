@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
-@EntityListeners({Order.class, User.class})
+/*@EntityListeners({Order.class, User.class})*/
 @Data
 public abstract class Model implements Serializable {
 

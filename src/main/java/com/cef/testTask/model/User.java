@@ -1,16 +1,19 @@
 package com.cef.testTask.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Data
 @Entity
-@Table(name = "User_table")
-public class User extends Model {
+@Table(name = "user_table")
+public class User {
 
     @Id
     @Column(name = "user_id")
@@ -30,13 +33,13 @@ public class User extends Model {
     @Email(message = "Email should be valid.")
     private String email;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinTable(
-            name = "User_Role",
+            name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private List<Role> roles;
 
     private String fileName;
 
