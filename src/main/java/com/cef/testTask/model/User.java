@@ -9,13 +9,20 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "users_table")
+@Table(name = "User_table")
 public class User extends Model {
+
+    @Id
+    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Size(min = 3, max = 32, message = "Set login from 3 to 32 letters.")
     private String login;
 
     private String password;
+    @Transient
+    private String passwordConfirm;
 
     @Size(min = 3, max = 32, message = "Set name 3 to 32 letters.")
     private String name;
@@ -25,8 +32,8 @@ public class User extends Model {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "id"),
+            name = "User_Role",
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
