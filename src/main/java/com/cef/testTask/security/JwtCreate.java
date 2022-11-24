@@ -38,6 +38,7 @@ public class JwtCreate {
         claims.put("roles", roles);
         claims.put("login", user.getLogin());
         claims.put("email", user.getEmail());
+        claims.put("name", user.getName());
 
         return Jwts.builder()
                 .setClaims(claims)
