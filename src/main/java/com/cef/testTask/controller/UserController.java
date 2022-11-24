@@ -20,16 +20,20 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Controller
 public class UserController {
+
     public JwtCreate jwtCreate = new JwtCreate();
-    public JwtResponse jwtResponse = new JwtResponse();
+
+    private final Map<String, String> jwtRefreshTokenStorage = new HashMap<>();
 
     public static String uploadDirectory = "src/main/resources/static";
+
+    private final Map<String, String> refreshStorage = new HashMap<>();
 
     @Autowired
     private UserService userService;
@@ -81,21 +85,19 @@ public class UserController {
             model.addAttribute("userEmail", authenticated.getEmail());
             model.addAttribute("userFileName", authenticated.getFileName());
             model.addAttribute("userFilePath", authenticated.getFilePath());
-            jwtResponse.setAccessToken(jwtCreate.accessToken(authenticated));
-            jwtResponse.setRefreshToken(jwtCreate.refreshToken(authenticated));
-            jwtResponse.setLogin(authenticated.getLogin());
 
-            String response = "Произошла авторизация пользователя " + authenticated.getLogin()
-                    +"<br>"+
-                    "Назначенная роль : " + authenticated.getRoles().stream().map(Role::getName).toList()
-                    +"<br>"+
-                    jwtResponse.toString();
+            final String accessToken = jwtCreate.accessToken(authenticated);
+            final String refreshToken = jwtCreate.refreshToken(authenticated);
+            refreshStorage.put(user.getLogin(), refreshToken);
+            return new JwtResponse(accessToken, refreshToken).toString();
+
 
             //return "personal_page";} убрать респонсбади
-            return response;
+
         }
         else {
             return "error_page";
         }
     }
+
 }

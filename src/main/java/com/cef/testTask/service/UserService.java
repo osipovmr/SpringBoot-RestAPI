@@ -51,7 +51,7 @@ public class UserService {
                 System.out.println("Duplicate login");
                 return null;
             }
-            //String defaultRole = String.valueOf(roleRepository.findByName("Role_USER"));
+
             User user = new User();
             user.setLogin(login);
             user.setPassword(password);
@@ -59,7 +59,7 @@ public class UserService {
             user.setEmail(email);
             user.setFileName(fileName);
             user.setFilePath(filePath);
-            //user.setRoles(defaultRole);
+            //user.setRoles("ROLE_ADMIN");
             return userRepository.save(user);
         }
     }

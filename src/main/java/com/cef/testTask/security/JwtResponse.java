@@ -2,15 +2,16 @@ package com.cef.testTask.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class JwtResponse {
+
     private String accessToken;
     private String refreshToken;
-    private String login;
 
     @Override
     public String toString() {

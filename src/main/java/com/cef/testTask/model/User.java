@@ -1,14 +1,16 @@
 package com.cef.testTask.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.HashSet;
+
 import java.util.List;
 
 
-@Data
+@Setter
+@Getter
+@RequiredArgsConstructor
 @Entity
 @Table(name = "user_table")
 public class User {
@@ -42,5 +44,5 @@ public class User {
     private String fileName;
 
     private String filePath;
-
 }
+
