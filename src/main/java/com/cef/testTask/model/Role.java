@@ -1,14 +1,17 @@
 package com.cef.testTask.model;
 
-import lombok.Data;
+import lombok.*;
 
 
 import javax.persistence.*;
 import java.util.List;
 
 
-@Data
+@Getter
+@Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "role_table")
 public class Role {
     @Id
@@ -18,7 +21,4 @@ public class Role {
 
     private String name;
 
-    public String getName(int id) {
-        return name;
-    }
 }

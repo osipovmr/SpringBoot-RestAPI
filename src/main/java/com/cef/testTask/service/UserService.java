@@ -3,13 +3,14 @@ package com.cef.testTask.service;
 import com.cef.testTask.dto.UserDto;
 import com.cef.testTask.model.Role;
 import com.cef.testTask.model.User;
+import com.cef.testTask.repository.RoleRepository;
 import com.cef.testTask.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,9 +19,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
+    private final RoleRepository roleRepository;
 
 
     public List<UserDto> getAllUsersLocal() {
@@ -48,6 +51,7 @@ public class UserService {
                 System.out.println("Duplicate login");
                 return null;
             }
+            //String defaultRole = String.valueOf(roleRepository.findByName("Role_USER"));
             User user = new User();
             user.setLogin(login);
             user.setPassword(password);
@@ -55,7 +59,7 @@ public class UserService {
             user.setEmail(email);
             user.setFileName(fileName);
             user.setFilePath(filePath);
-            //user.setRoles(Collections.singleton(new Role("USER")));
+            //user.setRoles(defaultRole);
             return userRepository.save(user);
         }
     }

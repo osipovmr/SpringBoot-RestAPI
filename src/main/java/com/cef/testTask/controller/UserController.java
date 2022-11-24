@@ -1,6 +1,7 @@
 package com.cef.testTask.controller;
 
 import com.cef.testTask.dto.UserDto;
+import com.cef.testTask.model.Role;
 import com.cef.testTask.model.User;
 import com.cef.testTask.security.JwtCreate;
 import com.cef.testTask.security.JwtResponse;
@@ -19,7 +20,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -46,7 +49,6 @@ public class UserController {
         model.addAttribute("registerRequest", new User());
         return "register_form";
     }
-
 
     @GetMapping("/login")
     public String getLoginPage(Model model){
@@ -82,10 +84,10 @@ public class UserController {
             jwtResponse.setAccessToken(jwtCreate.accessToken(authenticated));
             jwtResponse.setRefreshToken(jwtCreate.refreshToken(authenticated));
             jwtResponse.setLogin(authenticated.getLogin());
-            System.out.println(authenticated.toString());
+
             String response = "Произошла авторизация пользователя " + authenticated.getLogin()
                     +"<br>"+
-                    "Назначенная роль : " + authenticated.getRoles()
+                    "Назначенная роль : " + authenticated.getRoles().stream().map(Role::getName).toList()
                     +"<br>"+
                     jwtResponse.toString();
 
