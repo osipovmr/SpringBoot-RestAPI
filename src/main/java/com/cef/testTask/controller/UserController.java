@@ -7,7 +7,9 @@ import com.cef.testTask.security.JwtResponse;
 import com.cef.testTask.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -78,7 +80,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public @ResponseBody String login(@ModelAttribute User user, Model model){
+    public String login(@ModelAttribute User user, Model model){
         User authenticated = userService.authenticate(user.getLogin(), user.getPassword());
         if (authenticated != null) {
             model.addAttribute("userLogin", authenticated.getLogin());
@@ -90,11 +92,9 @@ public class UserController {
             final String accessToken = jwtCreate.accessToken(authenticated);
             final String refreshToken = jwtCreate.refreshToken(authenticated);
             refreshStorage.put(user.getLogin(), refreshToken);
-            return new JwtResponse(accessToken, refreshToken).toString();
-
-
-            //return "personal_page";} убрать респонсбади
-
+            model.addAttribute("Token", new JwtResponse(accessToken, refreshToken).toString());
+            //return new JwtResponse(accessToken, refreshToken).toString();
+            return "personal_page";
         }
         else {
             return "error_page";
@@ -111,7 +111,6 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("api/admin")
     public ResponseEntity<String> helloAdmin() {
-
         return ResponseEntity.ok("Hello admin!");
     }
 }
