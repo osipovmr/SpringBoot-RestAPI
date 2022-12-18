@@ -7,16 +7,12 @@ import com.cef.testTask.security.JwtResponse;
 import com.cef.testTask.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-
 import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -68,6 +64,10 @@ public class UserController {
                            @RequestParam("file") MultipartFile file) throws IOException {
         if (bindingResult.hasErrors())
             return "register_form";
+        if (userService.isLoginExist(user)) {
+            System.out.println("Duplicate login");
+            return "error_page";
+        }
         String fileName = file.getOriginalFilename();
         String filePath = Paths.get(uploadDirectory, fileName).toString();
         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
@@ -93,7 +93,6 @@ public class UserController {
             final String refreshToken = jwtCreate.refreshToken(authenticated);
             refreshStorage.put(user.getLogin(), refreshToken);
             model.addAttribute("Token", new JwtResponse(accessToken, refreshToken).toString());
-            //return new JwtResponse(accessToken, refreshToken).toString();
             return "personal_page";
         }
         else {

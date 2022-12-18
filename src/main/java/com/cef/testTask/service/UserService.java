@@ -41,28 +41,26 @@ public class UserService {
         return userDto;
     }
 
+    public boolean isLoginExist (User user) {
+        if (userRepository.findFirstByLogin(user.getLogin()).isPresent())
+            return true;
+        else return false;
+    }
+
 
     public User registerUser(String login, String password, String name, String email,
                              String fileName, String filePath) throws IOException {
         if (login == null || password == null)
             return null;
-        else {
-            if (userRepository.findFirstByLogin(login).isPresent()) {
-                System.out.println("Duplicate login");
-                return null;
-            }
-
-            User user = new User();
-            user.setLogin(login);
-            user.setPassword(password);
-            user.setName(name);
-            user.setEmail(email);
-            user.setFileName(fileName);
-            user.setFilePath(filePath);
-            //user.setRoles("ROLE_ADMIN");
-            return userRepository.save(user);
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setName(name);
+        user.setEmail(email);
+        user.setFileName(fileName);
+        user.setFilePath(filePath);
+        return userRepository.save(user);
         }
-    }
 
     public User authenticate(String login, String password) {
         return userRepository.findByLoginAndPassword(login, password).orElse(null);
